@@ -1,6 +1,9 @@
 package com.calculadora.calculadora;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.calculadora.calculadora.exceptions.UnsupportedMathOperationException;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +16,7 @@ public class MathController {
     public Double sum(@PathVariable(value = "numOne") String numOne, @PathVariable(value = "numTwo") String numTwo )
     throws Exception{
         if(!isNumeric(numOne)||!isNumeric(numTwo)){
-            throw new Exception();
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
         }
         return convertToDouble(numOne)+convertToDouble(numTwo);
     }
